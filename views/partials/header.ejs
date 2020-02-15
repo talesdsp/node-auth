@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+
+    html {
+      font-size: 10px;
+      width: 100vw;
+      height: 100vh;
+      overflow-x: hidden;
+      background-color: #eee;
+      font-family: sans-serif;
+    }
+
+    .behind {
+      position: fixed;
+      filter: blur(2px);
+      height: calc(100vh - 80px);
+      margin-top: 80px;
+      padding: 20px;
+      width: 100vw;
+    }
+
+    .content {
+      background-color: #f5f5f5;
+      padding: 20px;
+      height: calc(100%);
+      width: 400px;
+      border-radius: 0 50px 50px 0;
+      border-right: 1px solid dodgerblue;
+    }
+
+    .user {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+    }
+
+    .avatar {
+      background-color: aquamarine;
+      border-radius: 50%;
+      height: 90px;
+      width: 90px;
+    }
+
+    .name {
+      font-size: 4rem;
+      color: dodgerblue
+    }
+
+    nav {
+      position: absolute;
+      width: 100%;
+      height: 80px;
+      top: 0;
+      left: 0;
+      background-color: dodgerblue;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    main {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #fafafa;
+      border-radius: 5px;
+      box-shadow: -3px -3px 10px rgba(255, 255, 255, .7), 3px 3px 10px rgba(0, 0, 0, .3);
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 40rem;
+      margin-top: 5rem;
+      height: 80vh;
+      max-width: 70rem;
+      max-height: 100rem;
+    }
+
+    h1 {
+
+      font-size: 3rem;
+      margin-bottom: 20px;
+
+      color: dodgerblue
+    }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      width: 50%;
+      list-style: none;
+    }
+
+    li {
+      padding: .5rem 2.1rem;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+
+
+    form {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    fieldset {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      border: none;
+    }
+
+    label {
+      font-size: 1.8rem;
+    }
+
+    input {
+      padding: .5rem 2rem;
+      border-radius: .5rem;
+      width: 100%;
+      border: 1px solid aquamarine;
+    }
+
+    /* footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: salmon;
+      height: 120px;
+    } */
+
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      font-size: 1.6rem;
+    }
+  </style>
+
+</head>
+
+<body>
+
+
+  <nav>
+    <ul>
+      <a href="/">
+        <li>Dashboard</li>
+      </a>
+
+      <a href="/auth/login">
+        <li>Login</li>
+      </a>
+
+      <a href="/auth/register">
+        <li>Register</li>
+      </a>
+
+    </ul>
+  </nav>
