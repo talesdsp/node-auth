@@ -7,19 +7,18 @@ const User = require("../model/User");
 router
   .route("/register")
   .get((req, res) => {
-    res.render("register");
+    req.user ? res.redirect("/profile") : res.render("register");
   })
-  .post(async (req, res) => {
-    try {
-      const hashedPassword = await bcryptjs.hash(req.body.password, 5);
-      const newUser = new User({...req.body, password: hashedPassword});
-      await User.create(newUser);
-      res.redirect("/profile/");
-    } catch {}
-  });
+  .post(
+    createUser,
+    passport.authenticate("local", {
+      failureRedirect: "/auth/login",
+      successRedirect: "/profile"
+    })
+  );
 
 router.route("/login").get((req, res) => {
-  res.render("login");
+  req.user ? res.redirect("/profile") : res.render("login");
 });
 
 router.get("/logout", (req, res) => {
@@ -30,11 +29,9 @@ router.get("/logout", (req, res) => {
 router.post(
   "/local",
   passport.authenticate("local", {
-    failureRedirect: "/auth/login"
-  }),
-  (req, res) => {
-    res.redirect("/");
-  }
+    failureRedirect: "/auth/login",
+    successRedirect: "/profile"
+  })
 );
 
 //auth with google
