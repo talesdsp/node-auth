@@ -17,6 +17,18 @@ router
     })
   );
 
+async function createUser(req, res, next) {
+  try {
+    const exist = await User.findOne({email: req.body.email});
+    if (exist) {
+      res.redirect("/auth/login");
+    }
+    const hashedPassword = await bcryptjs.hash(req.body.password, 5);
+    await new User({...req.body, password: hashedPassword, thumbnail: ""}).save();
+    next();
+  } catch {}
+}
+
 router.route("/login").get((req, res) => {
   req.user ? res.redirect("/profile") : res.render("login");
 });
