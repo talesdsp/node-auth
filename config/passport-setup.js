@@ -3,6 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const passport = require("passport");
 const User = require("../model/User");
 const keys = require("./keys");
+const bcryptjs = require("bcryptjs");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -24,45 +25,47 @@ passport.use(
       clientID: keys.google.clientID,
       clientSecret: keys.google.clientSecret
     },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        const currentUser = await User.findOne({googleId: profile.id});
-        if (currentUser) {
-          done(null, currentUser);
-        } else {
-          const newUser = await new User({
-            googleId: profile.id,
-            username: profile.displayName,
-            thumbnail: profile._json.picture
-          }).save();
-
-          done(null, newUser);
-        }
-      } catch (err) {
-        console.log("strategy", err.messsage);
-      }
-    }
+    googleAuth
   )
 );
 
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await User.findOne({username: username});
-      console.log(user);
+passport.use(new LocalStrategy({usernameField: "email"}, localAuth));
 
-      // if (!user) {
-      //   console.log(newUser);
-      //   return done(null, false, {message: "Incorrect username."});
-      // }
-      if (!user && !user.validPassword(password)) {
-        return done(null, false, {message: "Incorrect password."});
-      }
-      const newUser = await new User({username: username, password: password}).save();
+async function googleAuth(accessToken, refreshToken, profile, done) {
+  try {
+    const currentUser = await User.findOne({googleId: profile.id});
+    if (currentUser) {
+      done(null, currentUser);
+    } else {
+      const newUser = await new User({
+        googleId: profile.id,
+        username: profile.displayName,
+        thumbnail: profile._json.picture
+      }).save();
 
-      return done(null, newUser);
-    } catch (err) {
-      return done(err);
+      done(null, newUser);
     }
-  })
-);
+  } catch (err) {
+    console.log("strategy", err.messsage);
+  }
+}
+
+async function localAuth(email, password, done) {
+  try {
+    const user = await User.findOne({email: email});
+    if (user === null) {
+      return done(null, false, {message: "Incorrect email."});
+    }
+    if (validPassword(password, user.password) === false) {
+      return done(null, false, {message: "Incorrect password."});
+    }
+
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+}
+
+async function validPassword(p, hash) {
+  return await bcryptjs.compare(p, hash);
+}
