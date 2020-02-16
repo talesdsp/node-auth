@@ -17,9 +17,9 @@ mongoose.connect(
     console.log("connected to mongo db");
   }
 );
-logger("dev");
 
 const app = express();
+app.use(logger("dev"));
 app.set("views", path.join(__dirname + "/views"));
 app.set("view engine", "ejs");
 app.set(express.static(__dirname + "/public"));
