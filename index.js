@@ -8,6 +8,7 @@ const profileRoutes = require("./router/profile");
 
 const passportSetup = require("./config/passport-setup");
 const keys = require("./config/keys");
+const logger = require("morgan");
 
 mongoose.connect(
   "mongodb://127.0.0.1:27017/oauth",
@@ -16,6 +17,7 @@ mongoose.connect(
     console.log("connected to mongo db");
   }
 );
+logger("dev");
 
 const app = express();
 app.set("views", path.join(__dirname + "/views"));
