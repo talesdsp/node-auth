@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <style>
+    :root {
+      --base: #1E90FF;
+      --alternate: #ECE4B7;
+      --dark: #091540;
+      --light: #7692FF;
+      --black: #13293D;
+      --white: #E8F1F2;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -18,26 +27,26 @@
       width: 100vw;
       height: 100vh;
       overflow-x: hidden;
-      background-color: #eee;
+      background-color: var(--dark);
       font-family: sans-serif;
     }
 
     .behind {
       position: fixed;
       filter: blur(2px);
-      height: calc(100vh - 80px);
-      margin-top: 80px;
-      padding: 20px;
+      height: calc(100vh - 8rem);
+      margin-top: 8rem;
+      padding: 2rem;
       width: 100vw;
     }
 
     .content {
-      background-color: #f5f5f5;
-      padding: 20px;
+      background-color: var(--white);
+      padding: 2rem;
       height: calc(100%);
-      width: 400px;
-      border-radius: 0 50px 50px 0;
-      border-right: 1px solid dodgerblue;
+      width: 40rem;
+      border-radius: 0 5rem 5rem 0;
+      border-right: .1rem solid var(--base);
     }
 
     .user {
@@ -48,30 +57,18 @@
     }
 
     .avatar {
-      background-color: aquamarine;
+      background-color: var(--alternate);
       border-radius: 50%;
-      height: 90px;
-      width: 90px;
+      height: 9rem;
+      width: 9rem;
     }
 
     .name {
       font-size: 4rem;
-      color: dodgerblue
+      color: var(--base);
     }
 
-    nav {
-      position: absolute;
-      width: 100%;
-      height: 80px;
-      top: 0;
-      left: 0;
-      background-color: dodgerblue;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      font-size: 1.6rem;
-      color: #fff;
-    }
+
 
     main {
       width: 100vw;
@@ -83,30 +80,48 @@
     }
 
     .card {
-      background-color: #fafafa;
+      background-color: var(--black);
       border-radius: 5px;
-      box-shadow: -3px -3px 10px rgba(255, 255, 255, .7), 3px 3px 10px rgba(0, 0, 0, .3);
-      width: 50%;
+      margin: 0;
       display: flex;
       justify-content: center;
       flex-direction: column;
       align-items: center;
-      width: 40rem;
-      margin-top: 5rem;
-      height: 80vh;
-      max-width: 70rem;
+      height: 70vh;
+      padding: 20px;
+      min-width: 36rem;
+      max-width: 90rem;
       max-height: 100rem;
     }
 
     h1 {
-
-      font-size: 3rem;
+      font-size: 4rem;
       margin-bottom: 20px;
+      color: var(--base);
+      margin: 0;
+    }
 
-      color: dodgerblue
+    .card h1 {
+      margin-top: 1rem;
+    }
+
+    .welcome {
+      color: #fff;
+      animation: fadeIn 1s linear;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     ul {
+      margin-left: 10%;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -121,11 +136,15 @@
       color: #fff;
     }
 
+    #title {
+      font-size: 2.2rem;
+    }
 
 
     form {
       padding: 2rem;
       display: flex;
+      width: 100%;
       justify-content: center;
       align-items: center;
       flex-direction: column;
@@ -140,30 +159,51 @@
 
     label {
       font-size: 1.8rem;
+      color: var(--white);
+    }
+
+    fieldset {
+      margin-bottom: 1rem;
     }
 
     input {
       padding: .5rem 2rem;
       border-radius: .5rem;
       width: 100%;
-      border: 1px solid aquamarine;
+      border: transparent;
+      background-color: var(--white);
     }
 
-    /* footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: salmon;
-      height: 120px;
-    } */
+    input {
+      border: 1px solid var(--white);
+    }
+
+    input[type='submit'] {
+      border: transparent;
+      margin-top: 1rem;
+      background-color: var(--base);
+      color: var(--white);
+      font-size: 1.6rem;
+      font-weight: bold;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
 
     a {
       text-decoration: none;
     }
 
-    p {
-      font-size: 1.6rem;
+    .redirect {
+      color: var(--light);
+      font-weight: bold;
+      text-decoration: underline;
+      font-size: 1.3rem;
+    }
+
+    form p {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: var(--white)
     }
   </style>
 
@@ -175,7 +215,7 @@
   <nav>
     <ul>
       <a href="/">
-        <li>Dashboard</li>
+        <li id="title">Dashboard</li>
       </a>
 
       <a href="/auth/login">
@@ -187,4 +227,36 @@
       </a>
 
     </ul>
+    <hr />
   </nav>
+
+
+  <style>
+    nav {
+      position: absolute;
+      width: 100vw;
+      height: 8rem;
+      top: 0;
+      left: 0;
+      margin: auto;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 3;
+      background-color: var(--dark);
+      color: #fff;
+    }
+
+    hr {
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      border: none;
+      margin: auto;
+      width: 80%;
+      height: .2rem;
+      background-image: radial-gradient(ellipse at center, var(--base) 0%, var(--dark) 80%);
+    }
+  </style>

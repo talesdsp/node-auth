@@ -4,45 +4,18 @@
     display: none;
   }
 </style>
-
-<style>
-  .login-bg {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    background-color: var(--dark);
-  }
-
-  .square {
-    width: 3rem;
-    height: 3rem;
-    animation: square 180s linear;
-  }
-
-  @keyframes square {
-    from {
-      transform: rotate(0) translate(-5rem, 9rem);
-    }
-
-    to {
-      transform: rotate(360) translate(5rem, 3rem);
-    }
-  }
-</style>
-<div class="login-bg">
-  <div class="square"></div>
-  <div class="triangle"></div>
-</div>
 <main>
   <div class="card">
 
-    <h1>Sign In</h1>
+    <h1>Sign Up</h1>
 
-    <form action="/auth/local" method="post" autocomplete="off">
+    <form action="/auth/register" method="post" autocomplete="off">
       <fieldset>
-        <label>Email:</label>
+        <label>Username:</label>
+        <input type="text" name="username" />
+      </fieldset>
+      <fieldset>
+        <label for="email">Email:</label>
         <input type="text" name="email" />
       </fieldset>
       <fieldset>
@@ -50,9 +23,9 @@
         <input type="password" name="password" />
       </fieldset>
       <fieldset>
-        <input type="submit" value="Sign In" />
+        <input type="submit" value="Sign Up" />
       </fieldset>
-      <p>Don't have an account yet?</p><a href="/auth/register" class="redirect">Sign Up</a>
+      <p>Already have an acount? </p><a href="/auth/login" class="redirect">Sign in</a>
     </form>
     <a href="/auth/google">
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -120,4 +93,5 @@
     </a>
   </div>
 </main>
-<%-include ("./partials/footer")%>
+
+<%- include ('partials/footer') %>
