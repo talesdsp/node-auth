@@ -1,3 +1,41 @@
 <%- include ('./partials/header') %>
-<%- include ('./partials/dashboard') %>
+<style>
+  .content {
+    background-color: var(--white);
+    padding: 2rem;
+    height: calc(100%);
+    width: 40rem;
+    border-radius: 0 5rem 5rem 0;
+    border-right: .1rem solid var(--base);
+  }
+
+  .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+  }
+
+  .avatar {
+    background-color: var(--alternate);
+    border-radius: 50%;
+    height: 9rem;
+    width: 9rem;
+  }
+
+  .name {
+    font-size: 4rem;
+    color: var(--base);
+  }
+</style>
+
+<div class="content">
+  <div class="user">
+    <div class="avatar"><img src="<%=thumbnail%>" alt="user"></div>
+  </div>
+  <div class="name"><%= username %></div>
+  <a href="/auth/logout"><button>Logout</button></a>
+</div>
+
+
 <%- include ('./partials/footer') %>
