@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const User = require("../model/User");
 
 const authChecker = (req, res, next) => {
   if (!req.user) {
@@ -10,8 +9,7 @@ const authChecker = (req, res, next) => {
 };
 
 router.get("/", authChecker, async (req, res) => {
-  const user = await User.findById(req.user.id);
-  res.render("profile", {username: user.username, picture: user.thumbnail});
+  res.render("profile", {username: req.user.username, thumbnail: req.user.thumbnail});
 });
 
 module.exports = router;
