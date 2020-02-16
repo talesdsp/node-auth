@@ -14,7 +14,7 @@ mongoose.connect(
   "mongodb://127.0.0.1:27017/oauth",
   {useNewUrlParser: true, useUnifiedTopology: true},
   () => {
-    console.log("connected to mongo db");
+    console.log("mongo connected");
   }
 );
 
@@ -49,4 +49,4 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 
-app.listen(9876, () => console.log("esta funcionando"));
+app.listen(9876, () => console.log("running on 9876"));
