@@ -10,7 +10,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-session": "^1.4.0",
     "ejs": "^3.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mongoose": "^5.9.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.1",
